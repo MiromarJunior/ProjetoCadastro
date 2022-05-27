@@ -4,8 +4,15 @@ const baseURL = process.env.REACT_APP_API_URL;
 
 
 const getProdutos = ()=>{
-    return axios.get(`http://localhost:5000/listarProduto`);
+    return axios.get(`${baseURL}listarProduto`);
+} 
+
+const saveProdutos = data =>{
+    return axios.post(`${baseURL}cadastrarProduto`,data);
 } 
 
 
-module.exports = { getProdutos}
+
+
+
+module.exports = { getProdutos,saveProdutos}
