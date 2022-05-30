@@ -6,9 +6,7 @@ const HomePage = ()=>{
 
     
 
-    function pageListarProdutos(){
-
-    }
+    
 
 
 
@@ -16,7 +14,10 @@ const HomePage = ()=>{
         <div>
            <h1> Seja bem vindo !!!</h1>
 
+
+           <div className="centralizar">
            <button onClick={()=>navigate("/listarProdutos")}  > LISTAR PRODUTOS</button>
+           </div>
 
 
         </div>

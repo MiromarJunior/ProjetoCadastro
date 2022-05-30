@@ -16,7 +16,7 @@ const AppRotas = () => {
             <Routes>
                 <Route exact path="/" element={<HomePage />} />
                 <Route exact path="/listarProdutos" element={<ListarProdutos />} />
-                <Route exact path="/cadastrarProdutos" element={<CadastrarProdutos />} />
+                <Route exact path="/cadastrarProdutos/:id" element={<CadastrarProdutos />} />
             </Routes>
         </BrowserRouter>
     )

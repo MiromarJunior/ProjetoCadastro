@@ -19,9 +19,7 @@ function ListarProdutos(){
     function buscarProdutos(){
         apiProdutosService.getProdutos()
         .then((res)=>{
-            setListaProdutos(res.data);
-            console.log(res.data)
-
+            setListaProdutos(res.data);         
 
         })
         .catch((res)=>{
@@ -32,30 +30,52 @@ function ListarProdutos(){
 
 
 return(
-    <div> 
-        
+    <div>        
          
         <h1>Listar Produtos</h1>
+
+        <div className="centralizar">
         <button onClick={()=>navigate("/")}  > HOME</button>
-        <button onClick={()=>navigate("/cadastrarProdutos")}  > CADASTRAR</button>
+        <button onClick={()=>navigate("/cadastrarProdutos/0")}  > CADASTRAR</button>
+        </div>  
+
+        <div className="centralizar tableLista" >
          <table>
+         <tbody>
+                 <tr style={{backgroundColor : "silver"}} >
+                     <th>DESCRIÇÃO</th>
+                     <th>CÓDIGO</th>
+                     <th>VALOR</th>
+                     <th>DATA VENCIMENTO</th>
+                     <th>ALTERAÇÃO</th>
+
+                 </tr>
+             </tbody>
+
              <tbody>         
                       { listaProdutos.map((a)=>
                  <tr key={a.PRDT_ID}>
                      <th>{a.PRDT_DESCRICAO}</th>
                      <th>{a.PRDT_CODIGO}</th>
-                     <th>{Number(a.PRDT_VALOR).toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}</th>
-                     <th>                      
-                         
-                         {(new Date(a.PRDT_DT_VALIDADE).getDate()) < 10 ? "0"+new Date(a.PRDT_DT_VALIDADE).getDate() : new Date(a.PRDT_DT_VALIDADE).getDate()+"/"+(new Date(a.PRDT_DT_VALIDADE).getMonth()+(1))+"/"+new Date(a.PRDT_DT_VALIDADE).getFullYear()}
-                                            
-                     
+                     <th className="alinharDir" >{(a.PRDT_VALOR).toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}</th>
+                     <th>            
+                         {apiProdutosService.dataFormatadaListar(a.PRDT_DT_VALIDADE)}
                      </th>
+                     <th>
+                         <button onClick={()=>navigate( `/cadastrarProdutos/${a.PRDT_ID}`)}>EDITAR</button>
+                         </th>
+            
                  </tr>
+
                   )} 
 
-             </tbody>                 
-             </table>         
+             </tbody> 
+             
+
+
+
+             </table>  
+             </div>       
 
 
     </div>
