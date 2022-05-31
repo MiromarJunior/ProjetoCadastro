@@ -27,6 +27,25 @@ function ListarProdutos(){
         })
     }
 
+function deletarProduto(id){
+    let dados = {id};
+    if(window.confirm("deseja excluir o item ?") ){
+       
+        apiProdutosService.deleteProduto(dados)
+        .then((res)=>{
+            alert(res.data); 
+            window.location.reload();   
+        })
+        .catch((res)=>{
+            console.log(res);
+        })
+    }  
+
+}
+
+
+
+
 
 
 return(
@@ -48,6 +67,7 @@ return(
                      <th>VALOR</th>
                      <th>DATA VENCIMENTO</th>
                      <th>ALTERAÇÃO</th>
+                     <th>EXCLUIR</th>
 
                  </tr>
              </tbody>
@@ -61,9 +81,16 @@ return(
                      <th>            
                          {apiProdutosService.dataFormatadaListar(a.PRDT_DT_VALIDADE)}
                      </th>
+
+
                      <th>
                          <button onClick={()=>navigate( `/cadastrarProdutos/${a.PRDT_ID}`)}>EDITAR</button>
                          </th>
+
+
+                         <th>
+                         <button onClick={()=>deletarProduto(a.PRDT_ID)}>EXCLUIR</button>                      
+                            </th>
             
                  </tr>
 

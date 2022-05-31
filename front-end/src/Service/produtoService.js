@@ -10,7 +10,9 @@ const getProdutosID = data=>{
     return axios.post(`${baseURL}listarProdutoID`,data);
 } 
 
-
+const deleteProduto = data =>{
+    return axios.post(`${baseURL}excluirProduto`, data)
+}
 
 
 
@@ -46,4 +48,4 @@ const dataFormatadaListar =(data)=>{
 
 
 
-module.exports = {getProdutosID,dataFormatadaInput,dataFormatadaListar, getProdutos,saveProdutos}
+module.exports = {deleteProduto,getProdutosID,dataFormatadaInput,dataFormatadaListar, getProdutos,saveProdutos}

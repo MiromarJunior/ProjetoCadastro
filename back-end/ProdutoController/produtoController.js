@@ -164,6 +164,52 @@ try {
 });
 
 
+router.post("/excluirProduto", async(req, res)=> {
+  let {id} = req.body;
+  let connection = await oracledb.getConnection(dbConfig);
+  let result;
+
+
+try {
+
+   await connection.execute ( 
+
+      ` DELETE PRODUTO PRDT 
+      WHERE PRDT_ID = :ID
+      `,
+      [id],
+      { outFormat  :  oracledb.OUT_FORMAT_OBJECT,
+        autoCommit : true
+      } 
+       );
+       res.send("Produto Excluído com Sucesso").status(200);
+      
+  
+    
+} catch (error) {
+    console.error(error);
+    res.send("erro de conexao").status(500);
+    
+}finally {
+    if(connection){
+        try {
+            await connection.close();
+          
+        } catch (error) {
+          console.error(error);              
+        }
+    }
+}
+
+
+
+
+});
+
+
+
+
+
 
 
 module.exports = router;
